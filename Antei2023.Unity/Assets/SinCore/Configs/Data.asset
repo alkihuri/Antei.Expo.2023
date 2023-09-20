@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7367f737aa8eb4049ab568325e61dab0, type: 3}
+  m_Name: Data
+  m_EditorClassIdentifier: 
+  fallSpeed: 5
+  allTimePlaying: 10
+  allCrabsNeedToWin: 5
+  speedOfGenerationStart: 0.8
+  speedOfGenerationMiddle: 0.4
+  speedOfGenerationEnd: 0.2
+  speedVariations: 0
+  startTimeTo: 15
+  middleTimeTo: 100
