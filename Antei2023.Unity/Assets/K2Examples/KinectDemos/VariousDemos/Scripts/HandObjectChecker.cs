@@ -20,7 +20,7 @@ public class HandObjectChecker : MonoBehaviour
 	public bool drawHandRectangles = false;
 
 	[Tooltip("UI-Text to display status messages.")]
-	public UnityEngine.UI.Text statusText;
+	public TMPro.TMP_Text statusText;
 
 	private long trackedUserId;
 	private byte userBodyIndex;
@@ -29,14 +29,14 @@ public class HandObjectChecker : MonoBehaviour
 	private KinectInterop.SensorData sensorData;
 	private long lastDepthFrameTime;
 
-	private Vector2 dposHandLeft = Vector2.zero;
-	private Vector2 dposHandRight = Vector2.zero;
+	public Vector2 dposHandLeft = Vector2.zero;
+	public Vector2 dposHandRight = Vector2.zero;
 
-	private Vector2 depthMinMaxHL = Vector2.zero;
-	private Vector2 depthMinMaxHR = Vector2.zero;
+	public Vector2 depthMinMaxHL = Vector2.zero;
+	public Vector2 depthMinMaxHR = Vector2.zero;
 
-	private Rect rectObjectHandLeft = new Rect();
-	private Rect rectObjectHandRight = new Rect();
+	public Rect rectObjectHandLeft = new Rect();
+	public Rect rectObjectHandRight = new Rect();
 
 	private float fillRatioLeftHand = 0f;
 	private float fillRatioRightHand = 0f;

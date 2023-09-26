@@ -23,20 +23,35 @@ public class GameCore : MonoBehaviour
     public int collectedCrabs = 0;
 
     private GameView view;
+    private Bucket bucket;
     private void Awake()
     {
+        bucket = GameObject.FindObjectOfType<Bucket>();
         collectedCrabs = 0;
         view = GameObject.FindObjectOfType<GameView>();
        // InitGame();
     }
     public void InitGame()
     {
+        StartCoroutine(InitGameTimer());
+
+    }
+
+    private IEnumerator InitGameTimer()
+    {
         currentTime = 0;
         collectedCrabs = 0;
+        view.ChangeCrabs(0);
         view.ChangeTime(config.allTimePlaying, config.allTimePlaying);
         view.EnableView();
+        while (!bucket.canUse)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        yield return new WaitForSeconds(0.2f);      
         IsGameStarted = true;
         StartCoroutine(GameTimer());
+        yield return new WaitForSeconds(0);
         StartCoroutine(CrabGenerator());
     }
     
@@ -114,8 +129,14 @@ public class GameCore : MonoBehaviour
                     all[i].TakeCrab();
                 }
             }
-            GameObject.FindObjectOfType<GameManager>().ChangeState(GameManager.State.win);
+            StartCoroutine(winTimer());
 
         }
+    }
+
+    private IEnumerator winTimer()
+    {
+        yield return new WaitForSeconds(1.5f);
+        GameObject.FindObjectOfType<GameManager>().ChangeState(GameManager.State.win);
     }
 }

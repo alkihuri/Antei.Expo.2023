@@ -23,19 +23,32 @@ public class GameView : View
 
     [SerializeField]
     private Image timePanelOrange;
-
-    [SerializeField]
-    private SpriteRenderer bucket;
     // private Vector2 scorePanelScale;
     // private Vector2 timePanelScale;
+    [SerializeField]
+    private ParticleSystem[] Particles;
+ 
 
-
-    [HideInInspector]
+     [HideInInspector]
     public int needToWin=100;
+
+    [SerializeField]
+    private TMP_Text bubbleTMP;
+    [SerializeField]
+    private Image[] bubbleImage;
+    [SerializeField]
+    private Animator bubbleAnim;
+
 
     private void Awake()
     {
-        bucket.color = new Color(1, 1, 1, 0);
+        Particles[0].Stop();
+        Particles[1].Stop();
+        bubbleTMP.enabled = false;
+        foreach(Image img in bubbleImage)
+        {
+            img.color = new Color(1, 1, 1, 0);
+        }
         //scorePanelScale = ScorePanel.localScale;
         //timePanelScale = TimePanel.localScale;
         backgroundImage.color = new Color(1, 1, 1, 0);
@@ -62,22 +75,22 @@ public class GameView : View
 
     public override void EnableView()
     {
-        bucket.color = new Color(1, 1, 1, 1);
         StartCoroutine(showUI());
     }
 
     public override void DisableView()
     {
-        bucket.color = new Color(1, 1, 1, 0);
         StartCoroutine(closeUI());
     }
 
     private IEnumerator showUI()
     {
+        Particles[0].Play();
+        Particles[1].Play();
         ScorePanel.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        while (LogoImage.color.a<1)
+        while (LogoImage.color.a < 1)
         {
-            yield return new WaitForFixedUpdate();           
+            yield return new WaitForFixedUpdate();
             LogoImage.color = new Color(1, 1, 1, LogoImage.color.a + 1.4f * Time.deltaTime);
             foreach (Image img in allBGImages)
             {
@@ -87,9 +100,34 @@ public class GameView : View
             TimePanel.localScale = new Vector2(TimePanel.localScale.x + 1.4f * Time.deltaTime, TimePanel.localScale.y + 1.4f * Time.deltaTime);
             backgroundImage.color = new Color(1, 1, 1, backgroundImage.color.a + 1.4f * Time.deltaTime);
         }
+
+        bubbleAnim.SetTrigger("PassiveBecome");
+        bubbleTMP.enabled = true;
+        while(bubbleImage[bubbleImage.Length-1].color.a < 1)
+        {
+            foreach (Image img in bubbleImage)
+            {
+                yield return new WaitForFixedUpdate();
+                img.color = new Color(1, 1, 1, img.color.a+1.4f*Time.deltaTime);
+            }
+        }
+        yield return new WaitForSeconds(3);
+        while (bubbleImage[bubbleImage.Length - 1].color.a > 0)
+        {
+            foreach (Image img in bubbleImage)
+            {
+                yield return new WaitForFixedUpdate();
+                img.color = new Color(1, 1, 1, img.color.a - 1.4f * Time.deltaTime);
+            }
+        }
+        bubbleTMP.enabled = false;
+       
+        
     }
     private IEnumerator closeUI()
     {
+        Particles[0].Stop();
+        Particles[1].Stop();
         //Image scoreImage = ScorePanel.transform.GetChild(0).GetComponent<Image>();
         while (LogoImage.color.a >0)
         {

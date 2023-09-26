@@ -58,7 +58,7 @@ public class PhotoShooter : MonoBehaviour
 	/// </summary>
 	public void MakePhoto()
 	{
-		MakePhoto(true);
+		MakePhoto(false);
 	}
 
 	/// <summary>

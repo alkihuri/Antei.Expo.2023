@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7367f737aa8eb4049ab568325e61dab0, type: 3}
   m_Name: Data
   m_EditorClassIdentifier: 
-  fallSpeed: 5
-  allTimePlaying: 10
-  allCrabsNeedToWin: 5
-  speedOfGenerationStart: 0.8
-  speedOfGenerationMiddle: 0.4
-  speedOfGenerationEnd: 0.2
-  speedVariations: 0
+  fallSpeed: 3.5
+  allTimePlaying: 60
+  allCrabsNeedToWin: 15
+  speedOfGenerationStart: 1
+  speedOfGenerationMiddle: 0.6
+  speedOfGenerationEnd: 0.3
+  speedVariations: 0.1
   startTimeTo: 15
-  middleTimeTo: 100
+  middleTimeTo: 35
